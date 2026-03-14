@@ -33,7 +33,7 @@ export default function FileList({ files, onRemove, onReorder }: Props) {
 
   return (
     <div className="mt-6">
-      <h2 className="text-lg font-semibold text-gray-800 mb-3">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
         업로드된 파일 ({files.length}개)
       </h2>
       <ul className="space-y-2">
@@ -44,19 +44,19 @@ export default function FileList({ files, onRemove, onReorder }: Props) {
             onDragStart={() => handleDragStart(index)}
             onDragOver={(e) => handleDragOver(e, index)}
             onDrop={handleDrop}
-            className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm hover:shadow cursor-grab active:cursor-grabbing transition-shadow"
+            className="flex items-center justify-between bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-4 py-3 shadow-sm hover:shadow cursor-grab active:cursor-grabbing transition-shadow"
           >
             <div className="flex items-center gap-3 min-w-0">
-              <span className="text-sm font-mono text-gray-400 w-6 text-right shrink-0">
+              <span className="text-sm font-mono text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
                 {index + 1}
               </span>
               {/* 드래그 핸들 */}
-              <svg className="w-5 h-5 text-gray-300 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-gray-300 dark:text-gray-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M7 2a2 2 0 10.001 4.001A2 2 0 007 2zm0 6a2 2 0 10.001 4.001A2 2 0 007 8zm0 6a2 2 0 10.001 4.001A2 2 0 007 14zm6-8a2 2 0 10-.001-4.001A2 2 0 0013 6zm0 2a2 2 0 10.001 4.001A2 2 0 0013 8zm0 6a2 2 0 10.001 4.001A2 2 0 0013 14z" />
               </svg>
               <div className="min-w-0">
-                <p className="text-sm font-medium text-gray-700 truncate">{pdfFile.name}</p>
-                <p className="text-xs text-gray-400">총 {pdfFile.pageCount}페이지 → 첫 페이지만 추출</p>
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-200 truncate">{pdfFile.name}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">총 {pdfFile.pageCount}페이지 → 첫 페이지만 추출</p>
               </div>
             </div>
             <button
