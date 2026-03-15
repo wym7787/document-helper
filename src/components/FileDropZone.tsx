@@ -43,8 +43,8 @@ export default function FileDropZone({ onFiles }: Props) {
       onDrop={handleDrop}
       className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-colors ${
         isDragging
-          ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
-          : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 bg-gray-50 dark:bg-gray-800'
+          ? 'border-blue-500 bg-blue-50 dark:bg-blue-500/10'
+          : 'border-gray-300 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/20 bg-gray-50 dark:bg-white/5'
       }`}
     >
       <input
@@ -56,7 +56,7 @@ export default function FileDropZone({ onFiles }: Props) {
         className="hidden"
       />
       <svg
-        className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
+        className="mx-auto h-12 w-12 text-gray-400 dark:text-slate-400"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -68,10 +68,10 @@ export default function FileDropZone({ onFiles }: Props) {
           d="M12 16V4m0 0L8 8m4-4l4 4M4 14v4a2 2 0 002 2h12a2 2 0 002-2v-4"
         />
       </svg>
-      <p className="mt-3 text-gray-600 dark:text-gray-300">
+      <p className="mt-3 text-gray-600 dark:text-slate-300">
         PDF 파일을 여기에 드래그하거나 <span className="text-blue-600 dark:text-blue-400 font-medium">클릭하여 선택</span>하세요
       </p>
-      <p className="mt-1 text-sm text-gray-400 dark:text-gray-500">여러 파일을 한번에 선택할 수 있습니다</p>
+      <p className="mt-1 text-sm text-gray-400 dark:text-slate-500">여러 파일을 한번에 선택할 수 있습니다</p>
     </div>
   )
 }

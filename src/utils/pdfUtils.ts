@@ -22,6 +22,19 @@ export async function mergeFirstPages(pdfFiles: PdfFile[]): Promise<Uint8Array> 
   return mergedPdf.save()
 }
 
+// 각 PDF의 모든 페이지를 순서대로 병합
+export async function mergeAllPages(pdfFiles: PdfFile[]): Promise<Uint8Array> {
+  const mergedPdf = await PDFDocument.create()
+  for (const pdfFile of pdfFiles) {
+    const buffer = await pdfFile.file.arrayBuffer()
+    const srcPdf = await PDFDocument.load(buffer)
+    const pageIndices = Array.from({ length: srcPdf.getPageCount() }, (_, i) => i)
+    const pages = await mergedPdf.copyPages(srcPdf, pageIndices)
+    pages.forEach(page => mergedPdf.addPage(page))
+  }
+  return mergedPdf.save()
+}
+
 // PDF 바이트를 파일로 다운로드
 export function downloadPdf(bytes: Uint8Array, filename: string) {
   const blob = new Blob([bytes as BlobPart], { type: 'application/pdf' })

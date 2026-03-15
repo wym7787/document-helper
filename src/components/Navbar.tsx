@@ -6,7 +6,7 @@ interface Props {
 
 export default function Navbar({ onNavigate, isDark, onToggleDark }: Props) {
   return (
-    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-10 transition-colors duration-200">
+    <nav className="bg-white dark:bg-[#151b2e]/95 dark:backdrop-blur-md border-b border-gray-200 dark:border-slate-700/50 shadow-sm sticky top-0 z-10 transition-colors duration-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 로고 */}
@@ -25,7 +25,7 @@ export default function Navbar({ onNavigate, isDark, onToggleDark }: Props) {
           <button
             onClick={onToggleDark}
             aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
-            className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 transition-colors duration-200"
           >
             {isDark ? (
               /* 태양 아이콘 (라이트 모드로 전환) */

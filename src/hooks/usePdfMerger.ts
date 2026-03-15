@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react'
 import type { PdfFile } from '../types'
-import { getPageCount, mergeFirstPages, downloadPdf } from '../utils/pdfUtils'
+import { getPageCount, mergeFirstPages, mergeAllPages, downloadPdf } from '../utils/pdfUtils'
 
-export function usePdfMerger() {
+export type MergeMode = 'first-page' | 'all-pages'
+
+export function usePdfMerger(mode: MergeMode = 'first-page') {
   const [pdfFiles, setPdfFiles] = useState<PdfFile[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -55,8 +57,11 @@ export function usePdfMerger() {
     setError(null)
 
     try {
-      const bytes = await mergeFirstPages(pdfFiles)
-      downloadPdf(bytes, 'merged_first_pages.pdf')
+      const bytes = mode === 'all-pages'
+        ? await mergeAllPages(pdfFiles)
+        : await mergeFirstPages(pdfFiles)
+      const filename = mode === 'all-pages' ? 'merged_all_pages.pdf' : 'merged_first_pages.pdf'
+      downloadPdf(bytes, filename)
     } catch {
       setError('PDF 병합 중 오류가 발생했습니다.')
     } finally {
