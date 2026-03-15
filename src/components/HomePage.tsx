@@ -20,15 +20,15 @@ const features = [
   {
     id: 'pdf-split',
     icon: (
-      <svg className="w-8 h-8 text-gray-400 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
           d="M4 6h16M4 12h8m-8 6h16" />
       </svg>
     ),
-    title: '문서 정리',
-    description: '',
-    actionLabel: 'Coming Soon',
-    available: false,
+    title: 'PDF 분리',
+    description: 'PDF 파일을 페이지별로 분리하여 개별 파일로 다운로드할 수 있습니다. ZIP으로 한번에 받을 수도 있습니다.',
+    actionLabel: '시작하기',
+    available: true,
   },
   {
     id: 'pdf-compress',

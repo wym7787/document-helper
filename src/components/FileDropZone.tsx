@@ -2,9 +2,10 @@ import { useCallback, useRef, useState } from 'react'
 
 interface Props {
   onFiles: (files: FileList | File[]) => void
+  multiple?: boolean
 }
 
-export default function FileDropZone({ onFiles }: Props) {
+export default function FileDropZone({ onFiles, multiple = true }: Props) {
   const [isDragging, setIsDragging] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -51,7 +52,7 @@ export default function FileDropZone({ onFiles }: Props) {
         ref={inputRef}
         type="file"
         accept=".pdf"
-        multiple
+        multiple={multiple}
         onChange={handleChange}
         className="hidden"
       />
@@ -71,7 +72,7 @@ export default function FileDropZone({ onFiles }: Props) {
       <p className="mt-3 text-gray-600 dark:text-slate-300">
         PDF 파일을 여기에 드래그하거나 <span className="text-blue-600 dark:text-blue-400 font-medium">클릭하여 선택</span>하세요
       </p>
-      <p className="mt-1 text-sm text-gray-400 dark:text-slate-500">여러 파일을 한번에 선택할 수 있습니다</p>
+      {multiple && <p className="mt-1 text-sm text-gray-400 dark:text-slate-500">여러 파일을 한번에 선택할 수 있습니다</p>}
     </div>
   )
 }

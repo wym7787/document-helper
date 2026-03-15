@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import type { PdfFile } from '../types'
+import { usePagination } from '../hooks/usePagination'
+import Pagination from './Pagination'
 
 interface Props {
   files: PdfFile[]
@@ -12,13 +14,20 @@ export default function FileList({ files, onRemove, onReorder, mode = 'first-pag
   const dragItem = useRef<number | null>(null)
   const dragOverItem = useRef<number | null>(null)
 
-  const handleDragStart = (index: number) => {
-    dragItem.current = index
+  const { currentPage, totalPages, startIndex, endIndex, goToPage } = usePagination({
+    totalItems: files.length,
+  })
+
+  const paginatedFiles = files.slice(startIndex, endIndex)
+
+  const handleDragStart = (pageLocalIndex: number) => {
+    // 페이지 오프셋을 더해서 원본 배열 인덱스로 변환
+    dragItem.current = startIndex + pageLocalIndex
   }
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+  const handleDragOver = (e: React.DragEvent, pageLocalIndex: number) => {
     e.preventDefault()
-    dragOverItem.current = index
+    dragOverItem.current = startIndex + pageLocalIndex
   }
 
   const handleDrop = (e: React.DragEvent) => {
@@ -38,7 +47,7 @@ export default function FileList({ files, onRemove, onReorder, mode = 'first-pag
         업로드된 파일 ({files.length}개)
       </h2>
       <ul className="space-y-2">
-        {files.map((pdfFile, index) => (
+        {paginatedFiles.map((pdfFile, index) => (
           <li
             key={pdfFile.id}
             draggable
@@ -49,7 +58,7 @@ export default function FileList({ files, onRemove, onReorder, mode = 'first-pag
           >
             <div className="flex items-center gap-3 min-w-0">
               <span className="text-sm font-mono text-gray-400 dark:text-slate-500 w-6 text-right shrink-0">
-                {index + 1}
+                {startIndex + index + 1}
               </span>
               {/* 드래그 핸들 */}
               <svg className="w-5 h-5 text-gray-300 dark:text-slate-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -72,6 +81,7 @@ export default function FileList({ files, onRemove, onReorder, mode = 'first-pag
           </li>
         ))}
       </ul>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={goToPage} />
     </div>
   )
 }

@@ -2,9 +2,10 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 import HomePage from './components/HomePage'
 import PdfMergePage from './components/PdfMergePage'
+import PdfSplitPage from './components/PdfSplitPage'
 import Footer from './components/Footer'
 
-type Page = 'home' | 'pdf-merge'
+type Page = 'home' | 'pdf-merge' | 'pdf-split'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home')
@@ -20,6 +21,7 @@ function App() {
 
       {currentPage === 'home' && <HomePage onNavigate={handleNavigate} />}
       {currentPage === 'pdf-merge' && <PdfMergePage onBack={() => setCurrentPage('home')} />}
+      {currentPage === 'pdf-split' && <PdfSplitPage onBack={() => setCurrentPage('home')} />}
 
       <Footer />
     </div>
