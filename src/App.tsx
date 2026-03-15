@@ -9,7 +9,7 @@ type Page = 'home' | 'pdf-merge' | 'pdf-split'
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home')
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page as Page)
